@@ -3,7 +3,9 @@ guid: 1cf5892331fbdea45b2a2cbf53539eb6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - tilemap: {instanceID: 0}
+  - wall: {fileID: 11400000, guid: b57c0e96d4a1f9a4bac634e5c52ad437, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
