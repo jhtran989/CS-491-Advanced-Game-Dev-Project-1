@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     // Make this class a singleton
     public static GameManager instance = null;
 
+    public int playerBloodLevel = 0;
+
     public BoardManager boardScript;
 
     private int level = 3;
@@ -28,6 +30,10 @@ public class GameManager : MonoBehaviour
         boardScript.SetupScene(level);
     }
 
+    public void GameOver()
+    {
+        enabled = false;
+    }
 
     // Update is called once per frame
     void Update()
