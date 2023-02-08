@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;  
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public BoardManager boardScript;
 
-    private Text levelText; 
+    private TextMeshProUGUI levelText; 
     private GameObject levelImage;
     public int level = 0;
     private bool enemiesMoving;
@@ -48,11 +49,11 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
 
-        // TODO: set up UI system
-        //levelImage = GameObject.Find("LevelImage");
-        //levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        //levelText.text = "Day " + level;
-        //levelImage.SetActive(true);
+        levelImage = GameObject.Find("LevelImage");
+        levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+
+        levelText.SetText("Level " + level);
+        levelImage.SetActive(true);
 
         Invoke("HideLevelImage", levelStartDelay);
 
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     void HideLevelImage()
     {
-        //levelImage.SetActive(false);
+        levelImage.SetActive(false);
 
         doingSetup = false;
     }
@@ -83,8 +84,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        //levelText.text = "After " + level + " days, you starved.";
-        //levelImage.SetActive(true);
+        //levelText.SetText("Game Over");
+        levelImage.SetActive(true);
 
         enabled = false;
     }

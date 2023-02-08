@@ -80,6 +80,10 @@ public class Player : MovingObject
             // TODO: keep track of the number of items?
             other.gameObject.SetActive(false);
         }
+        else if (other.tag == "Enemy")
+        {
+            Debug.Log("DIE");
+        }
     }
     
     protected void Update()
