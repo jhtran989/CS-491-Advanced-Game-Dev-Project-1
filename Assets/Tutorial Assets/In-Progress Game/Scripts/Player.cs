@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 // FIXME: changed MonoBehavior to MovingObject
 // TODO: can enemies affect the items of the player (like the bloodpacks)? - LoseFood()
 
-public class MainPlayerMovement : MovingObject
+public class Player : MovingObject
 {
     // in-game stats
     public float speed;
@@ -52,16 +52,14 @@ public class MainPlayerMovement : MovingObject
         
         // NOTE: the trigger has to be spelled EXACTLY the same (case sensitive) as the trigger in the player controller
         animator.SetTrigger("PlayerChop");
+        
     }
+    
 
     private void Restart()
     {
-        // FIXME: Application.LoadLevel() is obsolete...
-        // Application.loadedLevel is also obsolete...
-        // Application.LoadLevel(Application.loadedLevel);
-        
-        // TODO: may not work...
-        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
