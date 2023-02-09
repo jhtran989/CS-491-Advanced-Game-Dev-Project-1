@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public float levelStartDelay = 1f; 
-    public int playerBloodLevel = 0;
+    public int playerBloodLevel;
     public float enemyTurnDelay = 0.1f;
 
     public float hordeSpeedScaling = 10f; // Larger is slower scaling 
@@ -93,12 +93,9 @@ public class GameManager : MonoBehaviour
 
     // FIXME: need to update game over screen (not just level screen)
     // GameOver is called when the player reaches 0 food points
-    public void GameOver()
+    public void GameOver(string gameOverText)
     {
-        //levelText.SetText("Game Over");
-
-        // Set levelText to with game over message
-        levelText.text = "Game Over...";
+        levelText.text = gameOverText;
         
         // Enable black background image gameObject.
         levelImage.SetActive(true);

@@ -13,9 +13,12 @@ public class Player : MovingObject
     public float speed;
     public int wallDamage = 1;
     public int pointsPerBloodpack = 10; // pointsPerFood
-    public int pointsPerInfusion = 20; // pointsPerSoda
+    public int pointsPerInfusion = 5; // pointsPerSoda
     public float restartLevelDelay = 1f;
 
+    public int playerBloodMax = 50;
+
+    public BloodBar bloodBar;
 
     private Animator animator;
     private int bloodLevel; // food
@@ -29,6 +32,10 @@ public class Player : MovingObject
 
         // Get the current food point total stored in GameManager.instance between levels.
         bloodLevel = GameManager.instance.playerBloodLevel;
+
+        bloodBar = GameObject.Find("BloodBar").GetComponent<BloodBar>();
+        bloodBar.SetMaxBloodLevel(playerBloodMax);
+        InvokeRepeating("LoseBlood", 1f, 1f);
 
         // Call the Start function of the MovingObject base class.
         base.Start();
@@ -69,12 +76,21 @@ public class Player : MovingObject
         //     AttemptMove<Wall> (horizontal, vertical);
         // }
         
-        // FIXME
-        // Debug.Log("finished update");
-        // Debug.Log("blood level: " + bloodLevel);
-        
         Vector2 movementNormalized = GetInput();
         Move(movementNormalized * speed);
+    }
+
+    void LoseBlood()
+    {
+        bloodLevel--;
+        bloodBar.SetBloodLevel(bloodLevel);
+        CheckIfGameOver();
+    }
+
+    void GainBlood(int amount)
+    {
+        bloodLevel = Mathf.Min(bloodLevel + amount, playerBloodMax);
+        bloodBar.SetBloodLevel(bloodLevel);
     }
 
     // AttemptMove overrides the AttemptMove function in the base class MovingObject
@@ -133,7 +149,6 @@ public class Player : MovingObject
         {
             // Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("Restart", restartLevelDelay);
-            
             // Disable the player object since level is over.
             enabled = false;
         }
@@ -142,21 +157,21 @@ public class Player : MovingObject
         else if (other.tag == "Infusion")
         {
             // TODO: keep track of the number of items?
-            
+            GainBlood(pointsPerInfusion);
             // Disable the infusion object the player collided with.
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Bloodpack")
         {
             // TODO: keep track of the number of items?
-            
+            GainBlood(pointsPerBloodpack);
             //Disable the bloodpack object the player collided with.
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Enemy")
         {
             // Call the GameOver function of GameManager.
-            GameManager.instance.GameOver();
+            GameManager.instance.GameOver("The mob got you...");
         }
     }
     
@@ -174,12 +189,8 @@ public class Player : MovingObject
     // CheckIfGameOver checks if the player is out of food points and if so, ends the game.
     private void CheckIfGameOver()
     {
-        // FIXME: set condition to some negative value for testing
-        if (bloodLevel <= -100)
-        {
-            //Call the GameOver function of GameManager.
-            GameManager.instance.GameOver();
-        }
+        if (bloodLevel < 0)
+            GameManager.instance.GameOver("Your cravings were not satisfied...");
     }
 
     private void Move(Vector2 velocity)
