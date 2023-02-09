@@ -82,11 +82,19 @@ public class GameManager : MonoBehaviour
         enemies.Add(script);
     }
 
+    // FIXME: need to update game over screen (not just level screen)
+    // GameOver is called when the player reaches 0 food points
     public void GameOver()
     {
         //levelText.SetText("Game Over");
+
+        // Set levelText to with game over message
+        levelText.text = "Game Over...";
+        
+        // Enable black background image gameObject.
         levelImage.SetActive(true);
 
+        // Disable this GameManager.
         enabled = false;
     }
 
