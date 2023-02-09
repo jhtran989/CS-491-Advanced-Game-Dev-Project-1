@@ -21,7 +21,7 @@ public class BoardManager : MonoBehaviour
     public int columns = 8;
     public int rows = 8;
     //TODO: make wallCount and itemCount scale with level number (like EnemyCount)?
-    public Count wallCount = new Count (5, 9);
+    public Count wallCount = new Count (7, 11);
     public Count itemCount = new Count (1, 5);
     public GameObject exit;
     public GameObject[] floorTiles;
@@ -38,13 +38,27 @@ public class BoardManager : MonoBehaviour
     void InitializeList()
     {
         gridPositions.Clear();
-        for (int x = 1; x < columns - 1; x++)
+        if (Random.value > 0.5f)
         {
-            for (int y = 1; y < rows - 1; y++)
+            for (int x = 0; x < columns; x++)
             {
-                gridPositions.Add(new Vector3(x, y, 0f));
+                for (int y = 1; y < rows - 1; y++)
+                {
+                    gridPositions.Add(new Vector3(x, y, 0f));
+                }
             }
         }
+        else 
+        {
+            for (int x = 1; x < columns - 1; x++)
+            {
+                for (int y = 0; y < rows; y++)
+                {
+                    gridPositions.Add(new Vector3(x, y, 0f));
+                }
+            }
+        }
+
     }
 
 

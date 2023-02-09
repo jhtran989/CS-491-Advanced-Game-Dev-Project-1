@@ -155,10 +155,6 @@ public class Player : MovingObject
         }
         else if (other.tag == "Enemy")
         {
-            // TODO: need to activate game over screen here...
-            
-            Debug.Log("DIE");
-            
             // Call the GameOver function of GameManager.
             GameManager.instance.GameOver();
         }

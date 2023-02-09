@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     // Make this class a singleton
     public static GameManager instance = null;
 
-    public float levelStartDelay = 2f; 
+    public float levelStartDelay = 1f; 
     public int playerBloodLevel = 0;
     public float enemyTurnDelay = 0.1f;
+
+    public float hordeSpeedScaling = 10f; // Larger is slower scaling 
 
     public BoardManager boardScript;
 
@@ -42,7 +44,14 @@ public class GameManager : MonoBehaviour
     void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
         level++;
+        SpeedUpHorde();
         InitGame();
+    }
+
+    void SpeedUpHorde()
+    {
+        Horde horde = GameObject.Find("Horde").GetComponent<Horde>();
+        horde.speed = Mathf.Log(level, hordeSpeedScaling) + 1;
     }
 
     void InitGame() 
