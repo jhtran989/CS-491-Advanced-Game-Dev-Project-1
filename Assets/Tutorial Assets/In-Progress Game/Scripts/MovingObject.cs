@@ -23,7 +23,7 @@ public abstract class MovingObject : MonoBehaviour
         //Get a component reference to this object's Rigidbody2D
         rb2D = GetComponent <Rigidbody2D> ();
 
-        //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
+        //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient. 
         inverseMoveTime = 1f / moveTime;
     }
 
