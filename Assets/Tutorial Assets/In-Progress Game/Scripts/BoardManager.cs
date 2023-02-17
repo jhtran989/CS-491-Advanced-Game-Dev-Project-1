@@ -20,6 +20,10 @@ public class BoardManager : MonoBehaviour
 
     public int columns = 8;
     public int rows = 8;
+    public int colMin = 10;
+    public int colMax = 14;
+    public int rowMin = 6;
+    public int rowMax = 10;
     //TODO: make wallCount and itemCount scale with level number (like EnemyCount)?
     public Count wallCount = new Count (7, 11);
     public Count itemCount = new Count (1, 5);
@@ -32,6 +36,14 @@ public class BoardManager : MonoBehaviour
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
+
+    void SetRandomDimensions()
+    {
+        columns = Random.Range(colMin, colMax);
+        rows = Random.Range(rowMin, rowMax);
+        int area = columns * rows;
+        wallCount = new Count(area/9, area/6);
+    }
 
 
     // TODO: Edit generation to make more interesting levels?
@@ -110,6 +122,7 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene(int level)
     {
+        SetRandomDimensions();
         BoardSetup();
         InitializeList();
         LayoutObjectAtRandom(wallTiles, wallCount);

@@ -145,10 +145,12 @@ public class GameManager : MonoBehaviour
                          "Score: " + _score;
         
         // destroy the score text
+        scoreText.SetText("");
         Destroy(scoreText);
         
         // stop tracking time and destroy text
         Timer.timerInstance.StopTime();
+        Timer.timerInstance.TimeText.SetText("");
         Destroy(Timer.timerInstance);
 
         // Enable black background image gameObject.
