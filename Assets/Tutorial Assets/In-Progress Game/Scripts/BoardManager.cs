@@ -42,7 +42,7 @@ public class BoardManager : MonoBehaviour
         columns = Random.Range(colMin, colMax);
         rows = Random.Range(rowMin, rowMax);
         int area = columns * rows;
-        wallCount = new Count(area/9, area/6);
+        wallCount = new Count(area/8, area/5);
     }
 
 
