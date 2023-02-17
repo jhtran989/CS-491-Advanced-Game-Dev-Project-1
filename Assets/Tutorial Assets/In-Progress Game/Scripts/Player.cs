@@ -24,6 +24,11 @@ public class Player : MovingObject
     private int bloodLevel; // food
 
     public Rigidbody2D moverBody;
+
+    // TODO: private variables are supposed to have a "_" in front of the variable name
+    // forgot about the GameManager instance
+    // private GameManager _gameManager;
+    private int _scoreMultiplier = 10;
     
     void Start()
     {
@@ -36,6 +41,10 @@ public class Player : MovingObject
         bloodBar = GameObject.Find("BloodBar").GetComponent<BloodBar>();
         bloodBar.SetMaxBloodLevel(playerBloodMax);
         InvokeRepeating("LoseBlood", 1f, 1f);
+        
+        // set GameManager object
+        // _gameManager =
+        //     GameObject.Find("GameManager").GetComponent<GameManager>();
 
         // Call the Start function of the MovingObject base class.
         base.Start();
@@ -91,6 +100,10 @@ public class Player : MovingObject
     {
         bloodLevel = Mathf.Min(bloodLevel + amount, playerBloodMax);
         bloodBar.SetBloodLevel(bloodLevel);
+        
+        // update score in GameManager
+        //_gameManager.UpdateScore(amount * _scoreMultiplier);
+        GameManager.instance.UpdateScore(amount * _scoreMultiplier);
     }
 
     // AttemptMove overrides the AttemptMove function in the base class MovingObject
@@ -143,6 +156,8 @@ public class Player : MovingObject
     // OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("other tag: " + other.tag);
+        
         // Check if the tag of the trigger collided with is Exit.
         // NOTE: need to use updated tags, like "Infusion" and "Bloodpack"
         if (other.tag == "Exit")
@@ -171,7 +186,7 @@ public class Player : MovingObject
         else if (other.tag == "Enemy")
         {
             // Call the GameOver function of GameManager.
-            GameManager.instance.GameOver("The mob got you...");
+            GameManager.instance.GameOver("The horde got you...");
         }
     }
     

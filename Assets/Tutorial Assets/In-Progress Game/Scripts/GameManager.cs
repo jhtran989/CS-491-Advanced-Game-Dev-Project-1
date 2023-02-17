@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     // Make this class a singleton
     public static GameManager instance = null;
 
+    // keeps track of the score
+    public TextMeshProUGUI scoreText;
+    private int _score = 0;
+
     public float levelStartDelay = 1f; 
     public int playerBloodLevel;
     public float enemyTurnDelay = 0.1f;
@@ -35,8 +39,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
         boardScript = GetComponent<BoardManager>();
+        
+        // don't clear the score from the previous level
+        //DontDestroyOnLoad(scoreText);
 
-        // NOTE: Old scene load was depricated
+        // NOTE: Old scene load was deprecated
         SceneManager.sceneLoaded += this.OnLoadCallback;
     }
 
@@ -45,6 +52,7 @@ public class GameManager : MonoBehaviour
     {
         level++;
         SpeedUpHorde();
+        KeepScoreOnLoad();
         InitGame();
     }
 
@@ -52,6 +60,17 @@ public class GameManager : MonoBehaviour
     {
         Horde horde = GameObject.Find("Horde").GetComponent<Horde>();
         horde.speed = Mathf.Log(level, hordeSpeedScaling) + 1;
+    }
+
+    void KeepScoreOnLoad()
+    {
+        // update the score
+        // TODO: need to get the score text object each time
+        scoreText = GameObject.Find("Score Text")
+            .GetComponent<TextMeshProUGUI>();
+        
+        // since _score is kept across levels, just need to update the display with the current score (no additional points added to the score)
+        UpdateScore(0);
     }
 
     void InitGame() 
@@ -65,6 +84,10 @@ public class GameManager : MonoBehaviour
         levelImage.SetActive(true);
 
         Invoke("HideLevelImage", levelStartDelay);
+        
+        // initialize score
+        // EDIT: should not set to 0 on every level...
+        //score = 0;
 
         enemies.Clear();
 
@@ -79,12 +102,12 @@ public class GameManager : MonoBehaviour
         doingSetup = false;
     }
 
-    void Update()
-    {
-        if(enemiesMoving || doingSetup)
-            return;
-        StartCoroutine (MoveEnemies ());
-    }
+    // void Update()
+    // {
+    //     if(enemiesMoving || doingSetup)
+    //         return;
+    //     StartCoroutine (MoveEnemies ());
+    // }
 
     public void AddEnemyToList(Enemy script)
     {
@@ -123,5 +146,15 @@ public class GameManager : MonoBehaviour
         }
 
         enemiesMoving = false;
+    }
+    
+    // update the score
+    public void UpdateScore(int scoreToAdd)
+    {
+        // update score
+        _score += scoreToAdd;
+        scoreText.text = "Score: " + _score;
+        
+        Debug.Log("Updated score: " + _score);
     }
 }

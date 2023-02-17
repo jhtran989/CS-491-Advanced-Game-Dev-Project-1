@@ -9,6 +9,6 @@ public class Horde : MonoBehaviour
 
     void Update()
     {
-        transform.position += Vector3.right * Time.deltaTime * speed;
+        transform.position += Vector3.right * (Time.deltaTime * speed);
     }
 }

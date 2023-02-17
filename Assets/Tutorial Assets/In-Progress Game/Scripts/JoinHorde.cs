@@ -9,6 +9,8 @@ public class JoinHorde : MonoBehaviour
         if (other.tag == "Enemy")
         {
             Destroy(gameObject);
+            
+            // TODO: maybe increase horde speed
         }
     }
 }
