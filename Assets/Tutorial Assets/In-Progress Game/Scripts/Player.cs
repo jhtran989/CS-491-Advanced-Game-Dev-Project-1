@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,11 +12,13 @@ using UnityEngine.SceneManagement;
 public class Player : MovingObject
 {
     // in-game stats
-    public float speed;
+    public float speed = 4;
     public int wallDamage = 1;
     public int pointsPerBloodpack = 10; // pointsPerFood
     public int pointsPerInfusion = 5; // pointsPerSoda
-    public float restartLevelDelay = 1f;
+    
+    // FIXME: reduced from 1f (takes too long)
+    public float restartLevelDelay = 0.5f;
 
     public int playerBloodMax = 50;
 
@@ -30,6 +34,9 @@ public class Player : MovingObject
     // private GameManager _gameManager;
     private int _scoreMultiplier = 10;
     
+    // keep track of time
+    public Timer timer;
+
     void Start()
     {
         // Get a component reference to the Player's animator component
@@ -40,11 +47,19 @@ public class Player : MovingObject
 
         bloodBar = GameObject.Find("BloodBar").GetComponent<BloodBar>();
         bloodBar.SetMaxBloodLevel(playerBloodMax);
-        InvokeRepeating("LoseBlood", 1f, 1f);
         
+        // need to set current blood level, carrying over from levels...
+        bloodBar.SetBloodLevel(GameManager.instance.playerBloodLevel);
+        
+        InvokeRepeating("LoseBlood", 1f, 1f);
+
         // set GameManager object
         // _gameManager =
         //     GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+        // find the time object
+        // timer = GameObject.Find("Timer Text")
+        //     .GetComponent<Timer>();
 
         // Call the Start function of the MovingObject base class.
         base.Start();
@@ -164,6 +179,15 @@ public class Player : MovingObject
         {
             // Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("Restart", restartLevelDelay);
+            
+            // stop tracking time
+            Timer.timerInstance.StopTime();
+            
+            // FIXME: need to destroy BloodBar each time...which is the first child under Canvas
+            // FIXME: need another object to delete the BloodBar, like the Player
+            // Destroy(GameObject.Find("Canvas").transform.GetChild(0).gameObject);
+            Destroy(bloodBar.gameObject);
+
             // Disable the player object since level is over.
             enabled = false;
         }
@@ -186,7 +210,11 @@ public class Player : MovingObject
         else if (other.tag == "Enemy")
         {
             // Call the GameOver function of GameManager.
-            GameManager.instance.GameOver("The horde got you...");
+            GameManager.instance.GameOver("The horde got you...\n" + 
+                                          "Blood Level: " + bloodLevel);
+
+            // make sure to destroy player
+            Destroy(gameObject);
         }
     }
     

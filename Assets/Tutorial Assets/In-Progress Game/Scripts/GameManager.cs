@@ -13,9 +13,16 @@ public class GameManager : MonoBehaviour
     // keeps track of the score
     public TextMeshProUGUI scoreText;
     private int _score = 0;
+    
+    // keep track of time
+    public Timer timer;
 
-    public float levelStartDelay = 1f; 
-    public int playerBloodLevel;
+    // FIXME: reduced from 1f (takes too long)
+    public float levelStartDelay = 0.5f; 
+    
+    // FIXME: should be the same as the max blood level initially (else, the blood bar would start at max and suddenly jump to playerBloodLevel) 
+    // TODO: create some Utilities file with global variables
+    public int playerBloodLevel = 50;
     public float enemyTurnDelay = 0.1f;
 
     public float hordeSpeedScaling = 10f; // Larger is slower scaling 
@@ -54,6 +61,12 @@ public class GameManager : MonoBehaviour
         SpeedUpHorde();
         KeepScoreOnLoad();
         InitGame();
+        
+        // want to start timer AFTER initializing the game (with the level delay)
+        KeepTimerOnLoad();
+        
+        // FIXME: moved setup scene (AFTER the timer)
+        boardScript.SetupScene(level); 
     }
 
     void SpeedUpHorde()
@@ -73,6 +86,16 @@ public class GameManager : MonoBehaviour
         UpdateScore(0);
     }
 
+    void KeepTimerOnLoad()
+    {
+        // find the time object
+        // timer = GameObject.Find("Timer Text")
+        //     .GetComponent<Timer>();
+        
+        // start tracking time
+        Timer.timerInstance.StartTime();
+    }
+
     void InitGame() 
     {
         doingSetup = true;
@@ -90,8 +113,6 @@ public class GameManager : MonoBehaviour
         //score = 0;
 
         enemies.Clear();
-
-        boardScript.SetupScene(level);    
     }
 
 
@@ -118,8 +139,18 @@ public class GameManager : MonoBehaviour
     // GameOver is called when the player reaches 0 food points
     public void GameOver(string gameOverText)
     {
-        levelText.text = gameOverText;
+        // update the game over screen with some stats
+        levelText.text = gameOverText + "\n" + 
+                         "Level: " + level + "\n" + 
+                         "Score: " + _score;
         
+        // destroy the score text
+        Destroy(scoreText);
+        
+        // stop tracking time and destroy text
+        Timer.timerInstance.StopTime();
+        Destroy(Timer.timerInstance);
+
         // Enable black background image gameObject.
         levelImage.SetActive(true);
 

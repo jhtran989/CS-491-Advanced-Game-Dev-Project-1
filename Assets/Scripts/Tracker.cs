@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tracker : MonoBehaviour
@@ -20,8 +21,14 @@ public class Tracker : MonoBehaviour
         // EDIT 2 - used position of transform instead of trackedObject for target in MoveTowards below...
         // offset.z = transform.position.z - trackedObject.position.z + 10;
         // offset.z = 0;
+
+        // check if the tracked object is already destroyed
+        if (trackedObject.IsDestroyed())
+        {
+            enabled = false;
+        }
         
-        // offset is different depending on current and tracked objects (for our case, the offset is 10 between tracker and player fsd fsda  k kl
+        // offset is different depending on current and tracked objects (for our case, the offset is 10 between tracker and player
         offset.z = transform.position.z - trackedObject.position.z;
     }
 
@@ -33,6 +40,12 @@ public class Tracker : MonoBehaviour
 
     private void LateUpdate()
     {
+        // check if the tracked object is already destroyed
+        if (trackedObject.IsDestroyed())
+        {
+            enabled = false;
+        }
+        
         transform.position =
             Vector3.MoveTowards(transform.position, 
                 trackedObject.position + offset, 
