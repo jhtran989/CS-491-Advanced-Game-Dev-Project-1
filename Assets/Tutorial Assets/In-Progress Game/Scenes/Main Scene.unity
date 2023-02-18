@@ -1701,7 +1701,39 @@ PrefabInstance:
       propertyPath: speedVampire
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6775954644065867287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775954644065867287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: ba5b8d75726ee934faa0824ef1e283f6, type: 2}
     m_RemovedComponents:
     - {fileID: 8501654781178003869, guid: 9d35804424a5d8f4e9ed5c765eecc5d5, type: 3}
     - {fileID: 6775954643554578405, guid: 9d35804424a5d8f4e9ed5c765eecc5d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d35804424a5d8f4e9ed5c765eecc5d5, type: 3}
+--- !u!1 &6775954645034443620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 340349724490806162, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6775954645034443619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &6775954645034443621
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6775954645034443620}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: ec250b2a735e4374c85fbd9f7bfa2774, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 0.32}
+  m_Direction: 1
