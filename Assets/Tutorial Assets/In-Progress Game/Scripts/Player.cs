@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public float speedBat = 4;
     private float speed;
 
+    public Collider2D colliderVampire;
+    public Collider2D colliderBat;
 
     public int wallDamage = 1;
     public int pointsPerBloodpack = 10; // pointsPerFood
@@ -52,6 +54,10 @@ public class Player : MonoBehaviour
         // Get a component reference to the Player's animator component
         animator = GetComponent<Animator>();
         animator.SetBool("IsBat", false);
+
+        // Set the vampire collider on
+        colliderBat.enabled = false;
+        colliderVampire.enabled = true;
 
         // Get the current food point total stored in GameManager.instance between levels.
         bloodLevel = GameManager.instance.playerBloodLevel;
@@ -96,12 +102,16 @@ public class Player : MonoBehaviour
             animator.SetBool("IsBat", true);
             bloodDrain = bloodDrainBat;
             speed = speedBat;
+            colliderBat.enabled = true;
+            colliderVampire.enabled = false;
         }
         else if (Input.GetKeyUp("space"))
         {
             animator.SetBool("IsBat", false);
             bloodDrain = bloodDrainVampire;
             speed = speedVampire;
+            colliderBat.enabled = false;
+            colliderVampire.enabled = true;
         }
     }
 
