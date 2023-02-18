@@ -43,9 +43,16 @@ public class Player : MonoBehaviour
     // forgot about the GameManager instance
     // private GameManager _gameManager;
     private int _scoreMultiplier = 10;
+
+    // Store the ints of the different layers 
+    private int _vampireLayer;
+    private int _batLayer;
     
     // keep track of time
     public Timer timer;
+
+    // Link to music player
+    public BGM music;
 
     void Start()
     {
@@ -54,6 +61,10 @@ public class Player : MonoBehaviour
         // Get a component reference to the Player's animator component
         animator = GetComponent<Animator>();
         animator.SetBool("IsBat", false);
+
+        // Load the ints of the different layers
+        _vampireLayer = LayerMask.NameToLayer("Vampire");
+        _batLayer = LayerMask.NameToLayer("Bat");
 
         // Set the vampire collider on
         colliderBat.enabled = false;
@@ -104,6 +115,8 @@ public class Player : MonoBehaviour
             speed = speedBat;
             colliderBat.enabled = true;
             colliderVampire.enabled = false;
+            gameObject.layer = _batLayer;
+            music.SwitchTrack(true);
         }
         else if (Input.GetKeyUp("space"))
         {
@@ -112,6 +125,8 @@ public class Player : MonoBehaviour
             speed = speedVampire;
             colliderBat.enabled = false;
             colliderVampire.enabled = true;
+            gameObject.layer = _vampireLayer;
+            music.SwitchTrack(false);
         }
     }
 
