@@ -12,7 +12,11 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     // in-game stats
-    public float speed = 4;
+    public float speedVampire = 4;
+    public float speedBat = 4;
+    private float speed;
+
+
     public int wallDamage = 1;
     public int pointsPerBloodpack = 10; // pointsPerFood
     public int pointsPerInfusion = 5; // pointsPerSoda
@@ -43,6 +47,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        speed = speedVampire;
+
         // Get a component reference to the Player's animator component
         animator = GetComponent<Animator>();
         animator.SetBool("IsBat", false);
@@ -89,13 +95,13 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("IsBat", true);
             bloodDrain = bloodDrainBat;
-            print("Space key was pressed");
+            speed = speedBat;
         }
         else if (Input.GetKeyUp("space"))
         {
             animator.SetBool("IsBat", false);
             bloodDrain = bloodDrainVampire;
-            print("Space key was released");
+            speed = speedVampire;
         }
     }
 
