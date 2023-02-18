@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     public int level = 0;
     private bool enemiesMoving;
     private bool doingSetup = true;  
-    private List<Enemy> enemies; 
 
     void Awake()
     {
@@ -44,7 +43,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-        enemies = new List<Enemy>();
+        //enemies = new List<Enemy>();
         boardScript = GetComponent<BoardManager>();
         
         // don't clear the score from the previous level
@@ -88,10 +87,6 @@ public class GameManager : MonoBehaviour
 
     void KeepTimerOnLoad()
     {
-        // find the time object
-        // timer = GameObject.Find("Timer Text")
-        //     .GetComponent<Timer>();
-        
         // start tracking time
         Timer.timerInstance.StartTime();
     }
@@ -111,8 +106,6 @@ public class GameManager : MonoBehaviour
         // initialize score
         // EDIT: should not set to 0 on every level...
         //score = 0;
-
-        enemies.Clear();
     }
 
 
@@ -121,18 +114,6 @@ public class GameManager : MonoBehaviour
         levelImage.SetActive(false);
 
         doingSetup = false;
-    }
-
-    // void Update()
-    // {
-    //     if(enemiesMoving || doingSetup)
-    //         return;
-    //     StartCoroutine (MoveEnemies ());
-    // }
-
-    public void AddEnemyToList(Enemy script)
-    {
-        enemies.Add(script);
     }
 
     // FIXME: need to update game over screen (not just level screen)
@@ -160,27 +141,6 @@ public class GameManager : MonoBehaviour
         enabled = false;
     }
 
-    IEnumerator MoveEnemies()
-    {
-        enemiesMoving = true;
-
-        yield return new WaitForSeconds(enemyTurnDelay);
-
-        if (enemies.Count == 0) 
-        {
-            yield return new WaitForSeconds(enemyTurnDelay);
-        }
-
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            enemies[i].MoveEnemy ();
-
-            yield return new WaitForSeconds(enemies[i].moveTime);
-        }
-
-        enemiesMoving = false;
-    }
-    
     // update the score
     public void UpdateScore(int scoreToAdd)
     {

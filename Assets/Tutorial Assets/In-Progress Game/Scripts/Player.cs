@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 // TODO: can enemies affect the items of the player (like the bloodpacks)? - LoseFood()
 
 // Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
-public class Player : MovingObject
+public class Player : MonoBehaviour
 {
     // in-game stats
     public float speed = 4;
@@ -53,16 +53,6 @@ public class Player : MovingObject
         
         InvokeRepeating("LoseBlood", 1f, 1f);
 
-        // set GameManager object
-        // _gameManager =
-        //     GameObject.Find("GameManager").GetComponent<GameManager>();
-        
-        // find the time object
-        // timer = GameObject.Find("Timer Text")
-        //     .GetComponent<Timer>();
-
-        // Call the Start function of the MovingObject base class.
-        base.Start();
     }
 
     // This function is called when the behaviour becomes disabled or inactive.
@@ -91,15 +81,6 @@ public class Player : MovingObject
         // Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
         vertical = (int) (Input.GetAxisRaw ("Vertical"));
         
-        // FIXME: condition below freezes or disables the character for some reason... 
-        // Check if we have a non-zero value for horizontal or vertical
-        // if(horizontal != 0 || vertical != 0)
-        // {
-        //     // Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it) 
-        //     // Pass in horizontal and vertical as parameters to specify the direction to move Player in.
-        //     AttemptMove<Wall> (horizontal, vertical);
-        // }
-        
         Vector2 movementNormalized = GetInput();
         Move(movementNormalized * speed);
     }
@@ -119,53 +100,6 @@ public class Player : MovingObject
         // update score in GameManager
         //_gameManager.UpdateScore(amount * _scoreMultiplier);
         GameManager.instance.UpdateScore(amount * _scoreMultiplier);
-    }
-
-    // AttemptMove overrides the AttemptMove function in the base class MovingObject
-    // AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
-    protected override void AttemptMove <T> (int xDir, int yDir)
-    {
-        // Every time player moves, subtract from blood level total.
-        // FIXME: don't need to decrease blood level for now...
-        //bloodLevel--;
-        
-        Debug.Log("In AttemptMove");
-
-        // Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
-        base.AttemptMove <T> (xDir, yDir);
-
-        // Hit allows us to reference the result of the Linecast done in Move.
-        RaycastHit2D hit;
-
-        // If Move returns true, meaning Player was able to move into an empty space.
-        if (Move (xDir, yDir, out hit)) 
-        {
-            // Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
-        }
-
-        // Since the player has moved and lost food points, check if the game has ended.
-        CheckIfGameOver();
-
-        // FIXME: not turns so commented this out
-        // Set the playersTurn boolean of GameManager to false now that players turn is over.
-        // GameManager.instance.playersTurn = false;
-    }
-    
-    // OnCantMove overrides the abstract function OnCantMove in MovingObject.
-    // It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy. 
-    // FIXME: removed generic to set type as Wall (just for the player...)
-    // EDIT: the inherited method needs the generic in the function definition...
-    protected override void OnCantMove <T> (T component)
-    {
-        // Set hitWall to equal the component passed in as a parameter.
-        Wall hitWall = component as Wall;
-        
-        //Call the DamageWall function of the Wall we are hitting.
-        hitWall.DamageWall(wallDamage);
-        
-        //Set the attack trigger of the player's animation controller in order to play the player's attack animation. 
-        // NOTE: the trigger has to be spelled EXACTLY the same (case sensitive) as the trigger in the player controller
-        animator.SetTrigger("PlayerChop");
     }
 
     // OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
@@ -221,10 +155,6 @@ public class Player : MovingObject
     // Restart reloads the scene when called.
     private void Restart()
     {
-        // Scene scene = SceneManager.GetActiveScene();
-        // SceneManager.LoadScene(scene.name);
-        
-        // FIXME: used the updated code at the END of the video instead (fourth video)
         // Load the last scene loaded, in this case Main, the only scene in the game.
         SceneManager.LoadScene(0);
     }

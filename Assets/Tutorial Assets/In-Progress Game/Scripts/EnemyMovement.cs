@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MovingObject
+public class EnemyMovement : MonoBehaviour
 {
     [SerializeField]
     private float _speed;
@@ -10,11 +10,6 @@ public class EnemyMovement : MovingObject
     private Rigidbody2D _rigidbody;
     private PlayerAwarenessController _playerAwarenessController;
     private Vector2 _targetDirection;
-
-    void Start()
-    {
-        base.Start();
-    }
 
     private void Awake()
     {
@@ -45,9 +40,4 @@ public class EnemyMovement : MovingObject
         _rigidbody.velocity = _targetDirection * _speed;
     }
 
-
-    protected override void OnCantMove<T>(T component)
-    {
-        throw new System.NotImplementedException();
-    }
 }
