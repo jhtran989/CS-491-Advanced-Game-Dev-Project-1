@@ -21,10 +21,14 @@ public class Player : MonoBehaviour
     public float restartLevelDelay = 0.5f;
 
     public int playerBloodMax = 50;
+    public int bloodDrainVampire = 1;
+    public int bloodDrainBat = 5;
+    private int bloodDrain;
 
     public BloodBar bloodBar;
 
     private Animator animator;
+
     private int bloodLevel; // food
 
     public Rigidbody2D moverBody;
@@ -41,9 +45,11 @@ public class Player : MonoBehaviour
     {
         // Get a component reference to the Player's animator component
         animator = GetComponent<Animator>();
+        animator.SetBool("IsBat", false);
 
         // Get the current food point total stored in GameManager.instance between levels.
         bloodLevel = GameManager.instance.playerBloodLevel;
+        bloodDrain = bloodDrainVampire;
 
         bloodBar = GameObject.Find("BloodBar").GetComponent<BloodBar>();
         bloodBar.SetMaxBloodLevel(playerBloodMax);
@@ -72,22 +78,30 @@ public class Player : MonoBehaviour
     // TODO: changed from tutorial (player can destroy walls?)
     protected void Update()
     {
-        int horizontal = 0;      // Used to store the horizontal move direction.
-        int vertical = 0;        // Used to store the vertical move direction.
-        
-        // Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
-        horizontal = (int) (Input.GetAxisRaw ("Horizontal"));
-
-        // Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
-        vertical = (int) (Input.GetAxisRaw ("Vertical"));
-        
         Vector2 movementNormalized = GetInput();
         Move(movementNormalized * speed);
+        CheckForBatmode();
+    }
+
+    private void CheckForBatmode()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            animator.SetBool("IsBat", true);
+            bloodDrain = bloodDrainBat;
+            print("Space key was pressed");
+        }
+        else if (Input.GetKeyUp("space"))
+        {
+            animator.SetBool("IsBat", false);
+            bloodDrain = bloodDrainVampire;
+            print("Space key was released");
+        }
     }
 
     void LoseBlood()
     {
-        bloodLevel--;
+        bloodLevel -= bloodDrain;
         bloodBar.SetBloodLevel(bloodLevel);
         CheckIfGameOver();
     }
@@ -97,8 +111,6 @@ public class Player : MonoBehaviour
         bloodLevel = Mathf.Min(bloodLevel + amount, playerBloodMax);
         bloodBar.SetBloodLevel(bloodLevel);
         
-        // update score in GameManager
-        //_gameManager.UpdateScore(amount * _scoreMultiplier);
         GameManager.instance.UpdateScore(amount * _scoreMultiplier);
     }
 
