@@ -7,8 +7,19 @@ public class BGM : MonoBehaviour
     public AudioSource sourceA;
     public AudioSource sourceB;
 
-    void Start()
+    public static BGM instance = null;
+
+    void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(sourceA);
         DontDestroyOnLoad(sourceB);

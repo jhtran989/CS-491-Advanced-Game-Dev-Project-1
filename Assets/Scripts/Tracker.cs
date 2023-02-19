@@ -44,6 +44,7 @@ public class Tracker : MonoBehaviour
         if (trackedObject.IsDestroyed())
         {
             enabled = false;
+            return;
         }
         
         transform.position =

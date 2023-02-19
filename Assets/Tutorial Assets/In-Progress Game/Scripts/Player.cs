@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     public Timer timer;
 
     // Link to music player
-    public BGM music;
+    //public BGM music;
 
     void Start()
     {
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
             colliderBat.enabled = true;
             colliderVampire.enabled = false;
             gameObject.layer = _batLayer;
-            music.SwitchTrack(true);
+            BGM.instance.SwitchTrack(true);
         }
         else if (Input.GetKeyUp("space"))
         {
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
             colliderBat.enabled = false;
             colliderVampire.enabled = true;
             gameObject.layer = _vampireLayer;
-            music.SwitchTrack(false);
+            BGM.instance.SwitchTrack(false);
         }
     }
 
