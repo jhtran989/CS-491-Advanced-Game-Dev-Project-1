@@ -15,14 +15,17 @@ public class PauseMenu : MonoBehaviour
     // Mimic deletion of objects created on new load (from using DontDestroyOnLoad) since the Canvas and ALL children are affected...including the Pause Menu
     private void Awake()
     {
-        if (initialCreation)
-        {
-            initialCreation = false;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // FIXME: BIG BUG - need to find some way to remove the other instances of the Pause Menu
+        // if (initialCreation)
+        // {
+        //     initialCreation = false;
+        // }
+        // else
+        // {
+        //     Destroy(gameObject);
+        // }
+        
+        Debug.Log("Pause Menu - Awaken");
     }
 
     // Update is called once per frame

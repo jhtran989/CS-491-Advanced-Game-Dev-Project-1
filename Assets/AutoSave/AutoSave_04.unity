@@ -595,7 +595,7 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   timer: {fileID: 0}
   levelStartDelay: 0
-  playerBloodLevel: 25
+  playerBloodLevel: 100
   enemyTurnDelay: 0.1
   hordeSpeedScaling: 10
   boardScript: {fileID: 0}
@@ -3282,6 +3282,16 @@ PrefabInstance:
     - target: {fileID: 7576699889801785093, guid: d2e4cdc97cee4524a94093fae7aa4edc,
         type: 3}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576699889801785093, guid: d2e4cdc97cee4524a94093fae7aa4edc,
+        type: 3}
+      propertyPath: m_AutoTiling
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576699889801785093, guid: d2e4cdc97cee4524a94093fae7aa4edc,
+        type: 3}
+      propertyPath: m_EdgeRadius
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7576699889801785093, guid: d2e4cdc97cee4524a94093fae7aa4edc,
@@ -3560,9 +3570,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
+      propertyPath: moverBody
+      value: 
+      objectReference: {fileID: 6775954645034443624}
+    - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
       propertyPath: colliderBat
       value: 
-      objectReference: {fileID: 6775954645034443621}
+      objectReference: {fileID: 6775954645034443622}
     - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
       propertyPath: speedVampire
@@ -3570,9 +3585,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
+      propertyPath: playerBloodMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
       propertyPath: colliderVampire
       value: 
       objectReference: {fileID: 6775954645034443622}
+    - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
+      propertyPath: pointsPerInfusion
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
+      propertyPath: restartLevelDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
+      propertyPath: pointsPerBloodpack
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6775954644065867287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
       propertyPath: m_Enabled
@@ -3612,6 +3647,12 @@ CapsuleCollider2D:
 --- !u!70 &6775954645034443622 stripped
 CapsuleCollider2D:
   m_CorrespondingSourceObject: {fileID: 6775954644065867287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6775954645034443619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &6775954645034443624 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6241924833500090287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
     type: 3}
   m_PrefabInstance: {fileID: 6775954645034443619}
   m_PrefabAsset: {fileID: 0}
