@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         //enemies = new List<Enemy>();
-        boardScript = GetComponent<BoardManager>();
+        boardScript = gameObject.GetComponent<BoardManager>();
         
         // don't clear the score from the previous level
         //DontDestroyOnLoad(scoreText);
