@@ -76,4 +76,7 @@ crashlytics-build.properties
 # Personal Additions
 .idea/
 **/.idea/
+**/*_BEFORE*
+**/*_AFTER*
+**/*_OLD*
 

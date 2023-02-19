@@ -10,8 +10,9 @@ public class Loader : MonoBehaviour
 
     void Awake()
     {
-        if (GameManager.instance == null)
-            Instantiate(gameManager);
+        // FIXME: initial instance of GameManager is being destroyed for some reason 
+        // if (GameManager.instance == null)
+        //     Instantiate(gameManager);
         
         // FIXME: timer doesn't need loader, unlike game manager
         // add same thing to the timer

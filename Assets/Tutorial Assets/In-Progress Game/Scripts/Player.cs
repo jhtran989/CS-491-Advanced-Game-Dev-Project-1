@@ -12,24 +12,24 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     // in-game stats
-    public float speedVampire = 4;
-    public float speedBat = 4;
+    public float speedVampire = 3;
+    public float speedBat = 5;
     private float speed;
 
     public Collider2D colliderVampire;
     public Collider2D colliderBat;
 
     public int wallDamage = 1;
-    public int pointsPerBloodpack = 10; // pointsPerFood
-    public int pointsPerInfusion = 5; // pointsPerSoda
+    public int pointsPerBloodpack = 5; // pointsPerFood
+    public int pointsPerInfusion = 2; // pointsPerSoda
     
     // FIXME: reduced from 1f (takes too long)
-    public float restartLevelDelay = 0.5f;
-
-    public int playerBloodMax = 50;
+    public float restartLevelDelay = 0.1f;
+    
     public int bloodDrainVampire = 1;
     public int bloodDrainBat = 5;
-    private int bloodDrain;
+    private int bloodDrain = 1;
+    private int _hordBloodDrain = 1;
 
     public BloodBar bloodBar;
 
@@ -75,13 +75,16 @@ public class Player : MonoBehaviour
         bloodDrain = bloodDrainVampire;
 
         bloodBar = GameObject.Find("BloodBar").GetComponent<BloodBar>();
-        bloodBar.SetMaxBloodLevel(playerBloodMax);
+        bloodBar.SetMaxBloodLevel(Constants.playerBloodMax);
+        
+        Debug.Log("max blood level: " + Constants.playerBloodMax);
+        Debug.Log("blood level: " + bloodLevel);
         
         // need to set current blood level, carrying over from levels...
-        bloodBar.SetBloodLevel(GameManager.instance.playerBloodLevel);
-        
-        InvokeRepeating("LoseBlood", 1f, 1f);
+        // bloodBar.SetBloodLevel(GameManager.instance.playerBloodLevel);
+        bloodBar.SetBloodLevel(bloodLevel);
 
+        InvokeRepeating(nameof(LoseBloodDrain), 1f, 1f);
     }
 
     // This function is called when the behaviour becomes disabled or inactive.
@@ -101,6 +104,9 @@ public class Player : MonoBehaviour
     // TODO: changed from tutorial (player can destroy walls?)
     protected void Update()
     {
+        // update blood level at game manager
+        GameManager.instance.playerBloodLevel = bloodLevel;
+        
         Vector2 movementNormalized = GetInput();
         Move(movementNormalized * speed);
         CheckForBatmode();
@@ -130,16 +136,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    void LoseBlood()
+    void LoseBlood(int amount)
     {
         bloodLevel -= bloodDrain;
         bloodBar.SetBloodLevel(bloodLevel);
         CheckIfGameOver();
     }
+    
+    private void LoseBloodDrain()
+    {
+        LoseBlood(bloodDrain);
+    }
+
+    public void LoseBloodHorde()
+    {
+        LoseBlood(_hordBloodDrain);
+    }
 
     void GainBlood(int amount)
     {
-        bloodLevel = Mathf.Min(bloodLevel + amount, playerBloodMax);
+        bloodLevel = Mathf.Min(bloodLevel + amount, Constants.playerBloodMax);
         bloodBar.SetBloodLevel(bloodLevel);
         
         GameManager.instance.UpdateScore(amount * _scoreMultiplier);
@@ -148,7 +164,8 @@ public class Player : MonoBehaviour
     // OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("other tag: " + other.tag);
+        // FIXME:
+        // Debug.Log("other tag: " + other.tag);
         
         // Check if the tag of the trigger collided with is Exit.
         // NOTE: need to use updated tags, like "Infusion" and "Bloodpack"
@@ -186,15 +203,24 @@ public class Player : MonoBehaviour
         }
         else if (other.tag == "Enemy")
         {
+            // TODO: deplete blood level instead of instant Game Over
             // Call the GameOver function of GameManager.
-            GameManager.instance.GameOver("The horde got you...\n" + 
-                                          "Blood Level: " + bloodLevel);
-
+            // GameManager.instance.GameOver("The horde got you...\n");
+            
+            // TODO: no longer destroys the player either
             // make sure to destroy player
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            
+            // deplete blood level
+            Debug.Log("Collided with horde");
+            LoseBlood(_hordBloodDrain);
+
+            // TODO: need to re-enable to keep the collision check active (BEFORE - just check once and collision is disabled afterwards) 
+            colliderVampire.enabled = false;
+            colliderVampire.enabled = true;
         }
     }
-    
+
     // Restart reloads the scene when called.
     private void Restart()
     {

@@ -18,11 +18,12 @@ public class GameManager : MonoBehaviour
     public Timer timer;
 
     // FIXME: reduced from 1f (takes too long)
-    public float levelStartDelay = 0.5f; 
+    public float levelStartDelay = 0f; 
     
     // FIXME: should be the same as the max blood level initially (else, the blood bar would start at max and suddenly jump to playerBloodLevel) 
-    // TODO: create some Utilities file with global variables
-    public int playerBloodLevel = 50;
+    // SOLVED: create some Utilities file with global variables -> in Constants.cs file
+    // initially set player blood level to the full bar
+    public int playerBloodLevel = Constants.playerBloodMax;
     public float enemyTurnDelay = 0.1f;
 
     public float hordeSpeedScaling = 10f; // Larger is slower scaling 
@@ -70,7 +71,10 @@ public class GameManager : MonoBehaviour
 
     void SpeedUpHorde()
     {
-        Horde horde = GameObject.Find("Horde").GetComponent<Horde>();
+        // FIXME: changed out horde with the no smoke version
+        // Horde horde = GameObject.Find("Horde").GetComponent<Horde>();
+        Horde horde = GameObject.Find(Constants.HORDE).GetComponent<Horde>();
+        
         horde.speed = Mathf.Log(level, hordeSpeedScaling) + 1;
     }
 
@@ -122,13 +126,14 @@ public class GameManager : MonoBehaviour
     {
         // update the game over screen with some stats
         levelText.text = gameOverText + "\n" + 
+                         "Blood Level: " + playerBloodLevel + "\n" +
                          "Level: " + level + "\n" + 
                          "Score: " + _score;
         
         // destroy the score text
         scoreText.SetText("");
         Destroy(scoreText);
-        
+
         // stop tracking time and destroy text
         Timer.timerInstance.StopTime();
         Timer.timerInstance.TimeText.SetText("");
