@@ -16,14 +16,14 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         // FIXME: BIG BUG - need to find some way to remove the other instances of the Pause Menu
-        // if (initialCreation)
-        // {
-        //     initialCreation = false;
-        // }
-        // else
-        // {
-        //     Destroy(gameObject);
-        // }
+        if (initialCreation)
+        {
+            initialCreation = false;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         
         Debug.Log("Pause Menu - Awaken");
     }

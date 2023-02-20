@@ -171,9 +171,6 @@ public class Player : MonoBehaviour
         // NOTE: need to use updated tags, like "Infusion" and "Bloodpack"
         if (other.tag == "Exit")
         {
-            // Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
-            Invoke("Restart", restartLevelDelay);
-            
             // stop tracking time
             Timer.timerInstance.StopTime();
             
@@ -184,6 +181,9 @@ public class Player : MonoBehaviour
 
             // Disable the player object since level is over.
             enabled = false;
+            
+            // Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
+            Invoke("Restart", restartLevelDelay);
         }
         
         // Check if the tag of the trigger collided with is Food.
