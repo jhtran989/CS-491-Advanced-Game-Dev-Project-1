@@ -80,3 +80,7 @@ crashlytics-build.properties
 **/*_AFTER*
 **/*_OLD*
 
+**/Alternate Scene.*
+**/Main Scene - Copy.*
+**/*_DIFFERENT*
+

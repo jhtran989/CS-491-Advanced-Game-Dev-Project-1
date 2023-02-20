@@ -645,7 +645,7 @@ MonoBehaviour:
   - {fileID: 123856977520989770, guid: a007e0399d132824d9ab28b73e6fe0ad, type: 3}
   - {fileID: 5906274128729398064, guid: 76ae5135125d65f46b9c41f21cbeb1c0, type: 3}
   - {fileID: 7494526968737048148, guid: a73036ef529d61b4c95e5707d9edb0a5, type: 3}
-  - {fileID: 9079849553305718019}
+  - {fileID: 3448831544993432175, guid: 0481308e262c2f348acfed9ec1a30a53, type: 3}
   enemyTiles:
   - {fileID: 7491990284837888418, guid: aa7005959108e1745a8d8dd7cecc9738, type: 3}
   - {fileID: 4867628579879684435, guid: da4dd677eadbb644fad2b92d662552c4, type: 3}
@@ -3642,7 +3642,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 0.32}
+  m_Size: {x: 0.32, y: 0.32}
   m_Direction: 1
 --- !u!70 &6775954645034443622 stripped
 CapsuleCollider2D:
@@ -3804,12 +3804,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b18068c7563286a489b58439ad39c563, type: 3}
---- !u!1 &9079849553305718019 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3448831544993432175, guid: 0481308e262c2f348acfed9ec1a30a53,
-    type: 3}
-  m_PrefabInstance: {fileID: 5899342827874684780}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9100858511023855755
 PrefabInstance:
   m_ObjectHideFlags: 0

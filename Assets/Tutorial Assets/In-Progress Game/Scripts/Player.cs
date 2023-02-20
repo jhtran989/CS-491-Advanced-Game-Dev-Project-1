@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
             // FIXME: need to destroy BloodBar each time...which is the first child under Canvas
             // FIXME: need another object to delete the BloodBar, like the Player
             // Destroy(GameObject.Find("Canvas").transform.GetChild(0).gameObject);
-            Destroy(bloodBar.gameObject);
+            // Destroy(bloodBar.gameObject);
 
             // Disable the player object since level is over.
             enabled = false;

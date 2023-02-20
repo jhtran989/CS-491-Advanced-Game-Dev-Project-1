@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public Timer timer;
 
     // FIXME: reduced from 1f (takes too long)
-    public float levelStartDelay = 0f; 
+    public float levelStartDelay = 0.1f; 
     
     // FIXME: should be the same as the max blood level initially (else, the blood bar would start at max and suddenly jump to playerBloodLevel) 
     // SOLVED: create some Utilities file with global variables -> in Constants.cs file
