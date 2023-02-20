@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
         // destroy the score text
         scoreText.SetText("");
         Destroy(scoreText);
+        
+        Debug.Log("Game Over -- stopping timer...");
 
         // stop tracking time and destroy text
         Timer.timerInstance.StopTime();

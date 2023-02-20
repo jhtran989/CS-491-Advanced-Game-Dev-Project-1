@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
   timer: {fileID: 0}
-  levelStartDelay: 0
+  levelStartDelay: 0.1
   playerBloodLevel: 100
   enemyTurnDelay: 0.1
   hordeSpeedScaling: 10
@@ -3577,7 +3577,7 @@ PrefabInstance:
         type: 3}
       propertyPath: colliderBat
       value: 
-      objectReference: {fileID: 6775954645034443622}
+      objectReference: {fileID: 6775954645034443621}
     - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
       propertyPath: speedVampire
