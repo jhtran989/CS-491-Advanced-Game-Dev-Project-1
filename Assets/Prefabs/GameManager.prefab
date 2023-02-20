@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1406740848892549364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1406740848892549371}
+  - component: {fileID: 1406740848892549369}
+  - component: {fileID: 1406740848892549368}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1406740848892549371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406740848892549364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.48, y: 4.816, z: 0.0029099882}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1406740848892549369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406740848892549364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bef5c3bbb801a2429633104f200ca79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  columns: 8
+  rows: 8
+  colMin: 10
+  colMax: 16
+  rowMin: 4
+  rowMax: 10
+  exit: {fileID: 4738484577943210185, guid: 1ee2aa2bb8e33064bb219deeff651747, type: 3}
+  floorTiles:
+  - {fileID: 7759691049451762480, guid: 0c3729cc353c73b4dabfc842df9fc858, type: 3}
+  - {fileID: 7759691049451762480, guid: 8cc302c1efdc150498fb1e6a6aab46ab, type: 3}
+  - {fileID: 7759691049451762480, guid: 0e4a377941c1e8349820e40de2b9ab98, type: 3}
+  - {fileID: 7759691049451762480, guid: 5705c07bc70490149a9c6c4012b078c4, type: 3}
+  - {fileID: 7759691049451762480, guid: d539ee7d8f2143145b0abb95c2a41f43, type: 3}
+  - {fileID: 7759691049451762480, guid: e7f376a29d2667c4da122a3304ea50d7, type: 3}
+  - {fileID: 7759691049451762480, guid: bba4e85a519fdbc4c8ac86957277f00f, type: 3}
+  - {fileID: 7759691049451762480, guid: a8a96f7aec3039148afd2ff91b366c07, type: 3}
+  wallTiles:
+  - {fileID: 4409461787501954785, guid: ab78a5c43350dd74d9563e002ed6b7bc, type: 3}
+  - {fileID: 4409461787501954785, guid: e5de7c14b89060c48a34d8940df5062a, type: 3}
+  - {fileID: 4409461787501954785, guid: aec87c308ed23de47825c10fbfa38694, type: 3}
+  - {fileID: 4409461787501954785, guid: 16cee8bf8565a7b42a911c1843992fed, type: 3}
+  - {fileID: 4409461787501954785, guid: ae7175d058f36134b8633f020a1f38f9, type: 3}
+  - {fileID: 4409461787501954785, guid: f099906f0d9b46c45a89e489fa91f145, type: 3}
+  - {fileID: 4409461787501954785, guid: 5012c69b95a591347929dc2e06c4c2c9, type: 3}
+  - {fileID: 4409461787501954785, guid: f34ead713db79fa49a23f0197c4f054d, type: 3}
+  - {fileID: 4409461787501954785, guid: 4a832b7cbb4b5a84180ae6389aba0f53, type: 3}
+  - {fileID: 4409461787501954785, guid: 1531d15bfed653d49bb9ef828acae6cb, type: 3}
+  itemTiles:
+  - {fileID: 5901940830418319981, guid: 020dffd6e675c5749ab388ca4aefcb7d, type: 3}
+  enemyTiles:
+  - {fileID: 4450107285264169296, guid: d96182b08a6a7434f82e7851d6fe02d2, type: 3}
+  outerWallTiles:
+  - {fileID: 1581137872805380132, guid: cfed074ce71e47a45bbde523d900769c, type: 3}
+  - {fileID: 1581137872805380132, guid: 41ab65b8341d87c438770ac839ab3c33, type: 3}
+  - {fileID: 1581137872805380132, guid: b4c90bf3fcc299a469357d279bb96dd6, type: 3}
+  - {fileID: 1581137872805380132, guid: 7ba0f648502af1a4281273b258a32eef, type: 3}
+  - {fileID: 1581137872805380132, guid: ef9b74fa0bcc72f4292775251f809a13, type: 3}
+  - {fileID: 1581137872805380132, guid: 4e1f60cbce8bb3246a102e3ba36ced40, type: 3}
+--- !u!114 &1406740848892549368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406740848892549364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f53f6232f7ca533419ddf7772f9b99a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  timer: {fileID: 0}
+  levelStartDelay: 0
+  playerBloodLevel: 25
+  enemyTurnDelay: 0.1
+  hordeSpeedScaling: 10
+  boardScript: {fileID: 0}
+  level: 0
