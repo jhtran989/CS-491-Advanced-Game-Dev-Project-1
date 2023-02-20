@@ -598,8 +598,6 @@ MonoBehaviour:
   playerBloodLevel: 100
   hordeSpeedScaling: 10
   boardScript: {fileID: 0}
-  levelText: {fileID: 1362074021}
-  levelImage: {fileID: 2030087891}
   level: 0
 --- !u!114 &622690795
 MonoBehaviour:

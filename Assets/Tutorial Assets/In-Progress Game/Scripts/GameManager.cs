@@ -24,14 +24,13 @@ public class GameManager : MonoBehaviour
     // SOLVED: create some Utilities file with global variables -> in Constants.cs file
     // initially set player blood level to the full bar
     public int playerBloodLevel = Constants.playerBloodMax;
-    public float enemyTurnDelay = 0.1f;
 
     public float hordeSpeedScaling = 10f; // Larger is slower scaling 
 
     public BoardManager boardScript;
 
-    private TextMeshProUGUI levelText; 
-    private GameObject levelImage;
+    public TextMeshProUGUI levelText; 
+    public GameObject levelImage;
     public int level = 0;
     private bool enemiesMoving;
     private bool doingSetup = true;  
@@ -99,8 +98,8 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
 
-        levelImage = GameObject.Find("LevelImage");
-        levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        //levelImage = GameObject.Find("LevelImage");
+        //levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
 
         levelText.SetText("Level " + level);
         levelImage.SetActive(true);
@@ -122,25 +121,30 @@ public class GameManager : MonoBehaviour
 
     // FIXME: need to update game over screen (not just level screen)
     // GameOver is called when the player reaches 0 food points
-    public void GameOver(string gameOverText)
+    public void GameOver()
     {
+        Debug.Log("Got to game over");
         // update the game over screen with some stats
-        levelText.text = gameOverText + "\n" + 
-                         "Blood Level: " + playerBloodLevel + "\n" +
+        levelText.text = "Your cravings were not satisfied...\n" + 
                          "Level: " + level + "\n" + 
                          "Score: " + _score;
-        
+
+        //levelImage = GameObject.Find("LevelImage");
+        levelImage.SetActive(true);
+
+
         // destroy the score text
         scoreText.SetText("");
         Destroy(scoreText);
 
         // stop tracking time and destroy text
+
         Timer.timerInstance.StopTime();
         Timer.timerInstance.TimeText.SetText("");
         Destroy(Timer.timerInstance);
 
+
         // Enable black background image gameObject.
-        levelImage.SetActive(true);
 
         // Disable this GameManager.
         enabled = false;

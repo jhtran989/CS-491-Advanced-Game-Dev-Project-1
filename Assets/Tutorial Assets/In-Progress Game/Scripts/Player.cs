@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     private Animator animator;
 
-    private int bloodLevel; // food
+    public int bloodLevel; // food
 
     public Rigidbody2D moverBody;
 
@@ -69,6 +69,9 @@ public class Player : MonoBehaviour
         // Set the vampire collider on
         colliderBat.enabled = false;
         colliderVampire.enabled = true;
+
+        // Play vampire music
+        BGM.instance.SwitchTrack(false);
 
         // Get the current food point total stored in GameManager.instance between levels.
         bloodLevel = GameManager.instance.playerBloodLevel;
@@ -110,6 +113,7 @@ public class Player : MonoBehaviour
         Vector2 movementNormalized = GetInput();
         Move(movementNormalized * speed);
         CheckForBatmode();
+        CheckIfGameOver();
     }
 
     private void CheckForBatmode()
@@ -140,7 +144,6 @@ public class Player : MonoBehaviour
     {
         bloodLevel -= bloodDrain;
         bloodBar.SetBloodLevel(bloodLevel);
-        CheckIfGameOver();
     }
     
     private void LoseBloodDrain()
@@ -232,7 +235,7 @@ public class Player : MonoBehaviour
     private void CheckIfGameOver()
     {
         if (bloodLevel < 0)
-            GameManager.instance.GameOver("Your cravings were not satisfied...");
+            GameManager.instance.GameOver();
     }
 
     private void Move(Vector2 velocity)
