@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5883101105960889512}
   - component: {fileID: 3715066492684405511}
-  - component: {fileID: 8038684388679791162}
   - component: {fileID: 4656461553233491327}
+  - component: {fileID: 1863598808227315221}
   m_Layer: 7
   m_Name: Wall 1
   m_TagString: Untagged
@@ -86,8 +86,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8038684388679791162
-BoxCollider2D:
+--- !u!114 &4656461553233491327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409461787501954785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3bc7048827135048981822510675372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chopSound1: {fileID: 0}
+  chopSound2: {fileID: 0}
+  dmgSprite: {fileID: 21300096, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
+  hp: 3
+  something: 2
+--- !u!60 &1863598808227315221
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,23 +126,10 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &4656461553233491327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4409461787501954785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3bc7048827135048981822510675372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chopSound1: {fileID: 0}
-  chopSound2: {fileID: 0}
-  dmgSprite: {fileID: 21300096, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
-  hp: 3
-  something: 2
+  m_Points:
+    m_Paths:
+    - - {x: -0.013169289, y: 0.5286279}
+      - {x: -0.38487536, y: 0.22227818}
+      - {x: -0.38664252, y: -0.47147566}
+      - {x: 0.39901453, y: -0.47147566}
+      - {x: 0.34069163, y: 0.22051102}
