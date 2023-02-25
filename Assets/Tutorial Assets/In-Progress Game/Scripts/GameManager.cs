@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     {
         // FIXME: changed out horde with the no smoke version
         // Horde horde = GameObject.Find("Horde").GetComponent<Horde>();
-        Horde horde = GameObject.Find(Constants.HORDE).GetComponent<Horde>();
+        Horde horde = GameObject.Find(Constants.horde).GetComponent<Horde>();
         
         horde.speed = Mathf.Log(level, hordeSpeedScaling) + 1;
     }
