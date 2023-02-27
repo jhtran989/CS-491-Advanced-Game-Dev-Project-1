@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,22 +40,52 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            Debug.Log("GameManager initially created");
+        }
         else if (instance != this)
+        {
             Destroy(gameObject);
-
+        }
+        
+        Debug.Log("Awake: level " + level);
+        
         DontDestroyOnLoad(gameObject);
+
         //enemies = new List<Enemy>();
         boardScript = gameObject.GetComponent<BoardManager>();
         
         // don't clear the score from the previous level
         //DontDestroyOnLoad(scoreText);
 
+        // // NOTE: Old scene load was deprecated
+        // Debug.Log("GameManage OnLoadCallback");
+        // SceneManager.sceneLoaded -= this.OnLoadCallback;
+        // SceneManager.sceneLoaded += this.OnLoadCallback;
+    }
+
+    private void OnEnable()
+    {
         // NOTE: Old scene load was deprecated
+        Debug.Log("GameManage OnLoadCallback ENABLE");
         SceneManager.sceneLoaded += this.OnLoadCallback;
     }
 
-    // NOTE: Old scene load was depricated
+    private void OnDisable()
+    {
+        // NOTE: Old scene load was deprecated
+        Debug.Log("GameManage OnLoadCallback DISABLE");
+        SceneManager.sceneLoaded -= this.OnLoadCallback;
+    }
+
+    // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    // public static void GameManagerSceneLoad()
+    // {
+    //     SceneManager.sceneLoaded += instance.OnLoadCallback;
+    // }
+
+    // NOTE: Old scene load was deprecated
     void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
         level++;
