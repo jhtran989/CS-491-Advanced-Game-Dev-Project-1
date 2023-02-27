@@ -228,7 +228,9 @@ public class Player : MonoBehaviour
     private void Restart()
     {
         // Load the last scene loaded, in this case Main, the only scene in the game.
-        SceneManager.LoadScene(0);
+        // FIXME: the Main Menu scene is now index 0...better to specify by scene name than by scene index
+        // SceneManager.LoadScene(0);
+        SceneManager.LoadScene(Constants.mainGameScene);
     }
     
     // CheckIfGameOver checks if the player is out of food points and if so, ends the game.
