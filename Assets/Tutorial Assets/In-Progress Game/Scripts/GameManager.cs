@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public float hordeSpeedScaling = 10f; // Larger is slower scaling 
 
     public BoardManager boardScript;
+    private int boardNum = 0;
 
     public TextMeshProUGUI levelText; 
     public GameObject levelImage;
@@ -65,6 +66,10 @@ public class GameManager : MonoBehaviour
         KeepTimerOnLoad();
         
         // FIXME: moved setup scene (AFTER the timer)
+        // FIXME: a brand new board object gets created on the SECOND level...
+        Debug.Log("Board setup " + boardNum);
+        boardNum += 1;
+        
         boardScript.SetupScene(level); 
     }
 
@@ -98,8 +103,8 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
 
-        //levelImage = GameObject.Find("LevelImage");
-        //levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        // levelImage = GameObject.Find("LevelImage");
+        // levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
 
         levelText.SetText("Level " + level);
         levelImage.SetActive(true);

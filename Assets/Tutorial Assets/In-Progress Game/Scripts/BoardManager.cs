@@ -36,7 +36,8 @@ public class BoardManager : MonoBehaviour
     public GameObject[] enemyTiles;
     public GameObject[] outerWallTiles;
 
-    private Transform boardHolder;
+    // need to initialize this to null for initial check
+    private Transform boardHolder = null;
     private List<Vector3> gridPositions = new List<Vector3>();
 
     void SetRandomDimensions()
@@ -78,7 +79,13 @@ public class BoardManager : MonoBehaviour
 
     void BoardSetup()
     {
-        boardHolder = new GameObject("Board").transform;
+        // FIXME: only create a new board if there is no Board object already present
+        // FIXME: quick fix for now...
+        if (GameObject.Find(Constants.boardGameObject) == null)
+        {
+            boardHolder = new GameObject(Constants.boardGameObject).transform;
+        }
+
         for (int x = -1; x < columns + 1; x++)
         {
             for (int y = -1; y < rows + 1; y++)
