@@ -13,6 +13,12 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(Constants.mainGameScene);
+        SceneManager.LoadScene(Constants.mainGameScene, LoadSceneMode.Single);
+        // GameObject.Find("Canvas").gameObject.SetActive(true);
+        
+        if (DontDestroyOnLoadManager.canvasObject != null)
+        {
+            DontDestroyOnLoadManager.canvasObject.SetActive(true);
+        }
     }
 }

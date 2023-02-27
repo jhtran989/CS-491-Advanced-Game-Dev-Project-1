@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour
     public GameObject levelImage;
     public int level = 0;
     private bool enemiesMoving;
-    private bool doingSetup = true;  
+    private bool doingSetup = true;
+    
+    // instantiate a Canvas from a prefab (because of DontDestroyOnLoad)
+    public CanvasManager canvasManager;
 
     void Awake()
     {
@@ -51,11 +54,20 @@ public class GameManager : MonoBehaviour
         
         Debug.Log("Awake: level " + level);
         
-        DontDestroyOnLoad(gameObject);
+        // FIXME: replace with mananger via extension method
+        // DontDestroyOnLoad(gameObject);
+        gameObject.DontDestroyOnLoad();
+        
+        // FIXME: replace with mananger via extension method
+        GameObject.Find("Canvas").gameObject.DontDestroyOnLoad();
 
         //enemies = new List<Enemy>();
         boardScript = gameObject.GetComponent<BoardManager>();
         
+        // load the CanvasManager
+        canvasManager = gameObject.GetComponent<CanvasManager>();
+        // GameObject.Find("Canvas").gameObject.SetActive(true);
+
         // don't clear the score from the previous level
         //DontDestroyOnLoad(scoreText);
 
@@ -88,6 +100,9 @@ public class GameManager : MonoBehaviour
     // NOTE: Old scene load was deprecated
     void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
+        // first load the canvas
+        //canvasManager.LoadCanvas();
+        
         level++;
         SpeedUpHorde();
         KeepScoreOnLoad();
@@ -134,8 +149,8 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
 
-        // levelImage = GameObject.Find("LevelImage");
-        // levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        levelImage = GameObject.Find("LevelImage");
+        levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
 
         levelText.SetText("Level " + level);
         levelImage.SetActive(true);
@@ -150,7 +165,10 @@ public class GameManager : MonoBehaviour
 
     void HideLevelImage()
     {
-        levelImage.SetActive(false);
+        if(levelImage != null)
+        {
+            levelImage.SetActive(false);
+        }
 
         doingSetup = false;
     }

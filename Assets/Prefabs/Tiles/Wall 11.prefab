@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5883101105960889512}
   - component: {fileID: 3715066492684405511}
   - component: {fileID: 4656461553233491327}
-  - component: {fileID: 3583334954804873671}
+  - component: {fileID: 5258973683733751103}
   m_Layer: 7
-  m_Name: Wall 7
+  m_Name: Wall 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1861650685
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1790810727, guid: 83899ee5451f7d845a1ea70c8a5bc31e, type: 3}
+  m_Sprite: {fileID: 1587324910, guid: 83899ee5451f7d845a1ea70c8a5bc31e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   dmgSprite: {fileID: 21300096, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
   hp: 3
   something: 2
---- !u!60 &3583334954804873671
+--- !u!60 &5258973683733751103
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,18 +128,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.21692419, y: 0.4469242}
-      - {x: -0.5050555, y: 0.22404581}
-      - {x: -0.4870234, y: 0.030427873}
-      - {x: -0.38500357, y: 0.020970345}
-      - {x: -0.3129444, y: -0.10759449}
-      - {x: -0.27361155, y: -0.18665695}
-      - {x: -0.36241436, y: -0.23110867}
-      - {x: -0.5140128, y: -0.23695183}
-      - {x: -0.52771616, y: -0.5197787}
-      - {x: 0.52368593, y: -0.5331106}
-      - {x: 0.52019125, y: -0.3962174}
-      - {x: 0.21539307, y: -0.25068617}
-      - {x: 0.23720169, y: -0.19494438}
-      - {x: 0.48407936, y: 0.018472672}
-      - {x: 0.28767067, y: 0.35836512}
+    - - {x: -0.08016014, y: 0.0028419495}
+      - {x: -0.35836512, y: -0.09938091}
+      - {x: -0.5011287, y: -0.3121562}
+      - {x: -0.46794134, y: -0.5032883}
+      - {x: 0.4414311, y: -0.51035744}
+      - {x: 0.46440607, y: 0.06851822}

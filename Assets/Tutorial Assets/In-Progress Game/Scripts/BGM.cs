@@ -26,9 +26,14 @@ public class BGM : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(this.gameObject);
-        DontDestroyOnLoad(sourceA);
-        DontDestroyOnLoad(sourceB);
+        // FIXME: replace with mananger via extension method
+        // DontDestroyOnLoad(this.gameObject);
+        // DontDestroyOnLoad(sourceA);
+        // DontDestroyOnLoad(sourceB);
+        
+        this.gameObject.DontDestroyOnLoad();
+        sourceA.DontDestroyOnLoad();
+        sourceB.DontDestroyOnLoad();
     }
 
     private void Update()

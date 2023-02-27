@@ -6,4 +6,5 @@
     public static string mainGameScene = "Main Scene";
 
     public static string boardGameObject = "Board";
+    public static string canvasGameObject = "Canvas";
 }

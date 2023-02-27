@@ -35,7 +35,11 @@ public class Timer : MonoBehaviour
         }
 
         // TODO: can only call DontDestroyOnLoad() on root objects...which is the Canvas in this case
-        DontDestroyOnLoad(GameObject.Find("Canvas"));
+        // FIXME: replace with mananger via extension method
+        // DontDestroyOnLoad(GameObject.Find("Canvas"));
+        // GameObject.Find("Canvas").DontDestroyOnLoad();
+        //GetComponentInParent<Canvas>().gameObject.DontDestroyOnLoad();
+        // DontDestroyOnLoad(GameObject.Find("Canvas"));
 
         TimeText = GetComponent<TextMeshProUGUI>();
     }
@@ -88,5 +92,10 @@ public class Timer : MonoBehaviour
     public void StartTime()
     {
         enabled = true;
+    }
+
+    public void ResetTime()
+    {
+        timeElapsed = 0;
     }
 }
