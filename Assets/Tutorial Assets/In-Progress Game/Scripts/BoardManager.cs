@@ -18,6 +18,8 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    private float enemyCountScaling = 5;
+
     public int columns = 8;
     public int rows = 8;
     public int colMin = 10;
@@ -101,6 +103,23 @@ public class BoardManager : MonoBehaviour
         return randomPosition;
     }
 
+    Vector3 RandomPositionNearExit()
+    {
+        bool valid = false;
+        int randomIndex = -1;
+        Vector3 randomPosition = Vector3.zero;
+        while (!valid) 
+        {
+            randomIndex = Random.Range(0, gridPositions.Count);
+            randomPosition = gridPositions[randomIndex];
+            if (randomPosition.x > rows/2 && randomPosition.y > columns/2)
+                valid = true;
+        }
+
+        gridPositions.RemoveAt(randomIndex);
+        return randomPosition;
+    }
+
     void LayoutObjectAtRandom(GameObject[] tileArray, Count count)
     {
         int objectCount = Random.Range(count.minimum, count.maximum + 1);
@@ -113,11 +132,21 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    //TODO: Mess with EnemyCount scaling?
-    Count ChooseEnemyCount(int level)
+    void LayoutEnemies(GameObject[] tileArray, int level)
     {
-        int enemyCount = (int)Mathf.Log(level, 2f);
-        return new Count(enemyCount, enemyCount); 
+        int enemyCount = ChooseEnemyCount(level);
+
+        for(int i = 0; i < enemyCount; i++) 
+        {
+            Vector3 randomPosition = RandomPositionNearExit();
+            GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
+            Instantiate(tileChoice, randomPosition, Quaternion.identity);
+        }
+    }
+
+    int ChooseEnemyCount(int level)
+    {
+        return (int)Mathf.Log(level, enemyCountScaling);
     }
 
     public void SetupScene(int level)
@@ -127,8 +156,7 @@ public class BoardManager : MonoBehaviour
         InitializeList();
         LayoutObjectAtRandom(wallTiles, wallCount);
         LayoutObjectAtRandom(itemTiles, itemCount);
-        Count enemyCount = ChooseEnemyCount(level);
-        LayoutObjectAtRandom(enemyTiles, enemyCount);
+        LayoutEnemies(enemyTiles, level);
         Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F),  Quaternion.identity);
     }
 }

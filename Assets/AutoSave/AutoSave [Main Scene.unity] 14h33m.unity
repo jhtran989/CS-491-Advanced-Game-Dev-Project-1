@@ -207,7 +207,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -649,9 +649,6 @@ MonoBehaviour:
   - {fileID: 3448831544993432175, guid: 0481308e262c2f348acfed9ec1a30a53, type: 3}
   enemyTiles:
   - {fileID: 7491990284837888418, guid: aa7005959108e1745a8d8dd7cecc9738, type: 3}
-  - {fileID: 4867628579879684435, guid: da4dd677eadbb644fad2b92d662552c4, type: 3}
-  - {fileID: 450635685101370269, guid: 5f0c7f8a39c2ff44484fd9e52203bce7, type: 3}
-  - {fileID: 5724945471537281822, guid: b18068c7563286a489b58439ad39c563, type: 3}
   outerWallTiles:
   - {fileID: 1581137872805380132, guid: cfed074ce71e47a45bbde523d900769c, type: 3}
   - {fileID: 1581137872805380132, guid: 41ab65b8341d87c438770ac839ab3c33, type: 3}
@@ -3608,6 +3605,16 @@ PrefabInstance:
         type: 3}
       propertyPath: pointsPerBloodpack
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775954644065867287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775954644065867287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6775954644065867287, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
