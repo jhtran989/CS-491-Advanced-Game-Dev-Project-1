@@ -69,12 +69,15 @@ public class PauseMenu : MonoBehaviour
         // Time.timeScale = 1f;
         Debug.Log("Check Menu Button");
         
-        // TODO: create menu scene (separate from Main Scene) to load
+        // FIXME: need to destroy the game scene...specifically, the game objects that call DontDestroyOnLoad()
+        // https://gamedev.stackexchange.com/questions/140014/how-can-i-get-all-dontdestroyonload-gameobjects
+        SceneManager.UnloadSceneAsync(Constants.mainGameScene);
+        SceneManager.LoadScene(Constants.mainMenuScene);
     }
 
     public void QuitGame()
     {
         Debug.Log("Check Quit Button");
-        Application.Quit();
+        Application.Quit(); 
     }
 }

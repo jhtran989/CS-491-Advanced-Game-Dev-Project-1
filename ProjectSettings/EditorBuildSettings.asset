@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Tutorial Assets/In-Progress Game/Scenes/Main Menu.unity
+    guid: 7acc389a4939da34a916223e88602216
+  - enabled: 1
+    path: Assets/Tutorial Assets/In-Progress Game/Scenes/Main Scene.unity
+    guid: 0059baced602f844d8833357b3aed74f
   m_configObjects: {}

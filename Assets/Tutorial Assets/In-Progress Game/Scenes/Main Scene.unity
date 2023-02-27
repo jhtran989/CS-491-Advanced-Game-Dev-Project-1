@@ -594,11 +594,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
   timer: {fileID: 0}
-  levelStartDelay: 0.1
+  levelStartDelay: 0
   playerBloodLevel: 100
-  enemyTurnDelay: 0.1
   hordeSpeedScaling: 10
   boardScript: {fileID: 0}
+  levelText: {fileID: 1362074021}
+  levelImage: {fileID: 2030087891}
   level: 0
 --- !u!114 &622690795
 MonoBehaviour:
@@ -3601,7 +3602,7 @@ PrefabInstance:
     - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
       propertyPath: restartLevelDelay
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6775954643554578406, guid: 9d35804424a5d8f4e9ed5c765eecc5d5,
         type: 3}
