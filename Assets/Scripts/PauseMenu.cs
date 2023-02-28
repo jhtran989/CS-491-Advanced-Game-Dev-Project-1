@@ -83,7 +83,7 @@ public class PauseMenu : MonoBehaviour
         // FIXME: now need to destroy all GameObjects and AudioSources that call DontDestroyOnLoad
         DontDestroyOnLoadManager.DestroyAll();
 
-        SceneManager.LoadScene(Constants.mainMenuScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(Constants.mainMenuScene);
         // Canvas.ForceUpdateCanvases();
     }
 

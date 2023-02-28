@@ -231,6 +231,9 @@ public class Player : MonoBehaviour
         // FIXME: the Main Menu scene is now index 0...better to specify by scene name than by scene index
         // SceneManager.LoadScene(0);
         SceneManager.LoadScene(Constants.mainGameScene);
+        
+        // GameManager.instance.gameObject.SetActive(false);
+        // GameManager.instance.gameObject.SetActive(true);
     }
     
     // CheckIfGameOver checks if the player is out of food points and if so, ends the game.

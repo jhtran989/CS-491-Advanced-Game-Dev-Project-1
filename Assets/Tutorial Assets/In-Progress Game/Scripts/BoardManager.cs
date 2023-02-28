@@ -119,8 +119,14 @@ public class BoardManager : MonoBehaviour
         {
             randomIndex = Random.Range(0, gridPositions.Count);
             randomPosition = gridPositions[randomIndex];
-            if (randomPosition.x > rows/2 && randomPosition.y > columns/2)
+            if (randomPosition.x > rows / 2 && randomPosition.y > columns / 2)
+            {
                 valid = true;
+            }
+            else
+            {
+                Debug.Log("Stuck in RandomPositionNearExit");
+            }
         }
 
         gridPositions.RemoveAt(randomIndex);

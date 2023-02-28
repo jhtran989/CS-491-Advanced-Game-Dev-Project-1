@@ -80,14 +80,14 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         // NOTE: Old scene load was deprecated
-        Debug.Log("GameManage OnLoadCallback ENABLE");
+        Debug.Log("GameManager OnLoadCallback ENABLE");
         SceneManager.sceneLoaded += this.OnLoadCallback;
     }
 
     private void OnDisable()
     {
         // NOTE: Old scene load was deprecated
-        Debug.Log("GameManage OnLoadCallback DISABLE");
+        Debug.Log("GameManager OnLoadCallback DISABLE");
         SceneManager.sceneLoaded -= this.OnLoadCallback;
     }
 
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
 
-        levelImage = GameObject.Find("LevelImage");
+        levelImage = GameObject.Find("LevelImage").gameObject;
         levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
 
         levelText.SetText("Level " + level);
@@ -185,8 +185,7 @@ public class GameManager : MonoBehaviour
 
         //levelImage = GameObject.Find("LevelImage");
         levelImage.SetActive(true);
-
-
+        
         // destroy the score text
         scoreText.SetText("");
         Destroy(scoreText);

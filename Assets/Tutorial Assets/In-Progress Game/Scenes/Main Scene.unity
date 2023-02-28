@@ -836,6 +836,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4181936648523068188, guid: 86100c57a662b6940b61ca04b51d093e,
+        type: 3}
+      propertyPath: levelStartDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4181936648523068189, guid: 86100c57a662b6940b61ca04b51d093e,
         type: 3}
       propertyPath: itemTiles.Array.size
