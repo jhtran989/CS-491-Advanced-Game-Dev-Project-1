@@ -171,5 +171,7 @@ public class BoardManager : MonoBehaviour
         LayoutObjectAtRandom(itemTiles, itemCount);
         LayoutEnemies(enemyTiles, level);
         Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F),  Quaternion.identity);
+        
+        Debug.Log("Setting up board...");
     }
 }

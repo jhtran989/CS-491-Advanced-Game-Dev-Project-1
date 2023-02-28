@@ -63,6 +63,30 @@ public class PauseMenu : MonoBehaviour
         //Debug.Log("pause - successful?");
     }
 
+    public void Restart()
+    {
+        // FIXME: uncomment when doing TODO below
+        // Time.timeScale = 1f;
+        Debug.Log("Check Menu Button");
+        
+        // FIXME: need to destroy the game scene...specifically, the game objects that call DontDestroyOnLoad()
+        // https://gamedev.stackexchange.com/questions/140014/how-can-i-get-all-dontdestroyonload-gameobjects
+        // FIXME: unsupported...
+        // SceneManager.UnloadSceneAsync(Constants.mainGameScene);
+        
+        // need to resume the pause menu (so it doesn't appear on a restart of the game)
+        Resume();
+        
+        // need to reset time
+        Timer.timerInstance.ResetTime();
+        
+        // FIXME: now need to destroy all GameObjects and AudioSources that call DontDestroyOnLoad
+        DontDestroyOnLoadManager.DestroyAll();
+
+        SceneManager.LoadScene(Constants.mainGameScene);
+        // Canvas.ForceUpdateCanvases();
+    }
+
     public void LoadMenu()
     {
         // FIXME: uncomment when doing TODO below

@@ -50,6 +50,9 @@ public class Player : MonoBehaviour
     
     // keep track of time
     public Timer timer;
+    
+    // only check game over once
+    private static bool _checkGameOver = false;
 
     // Link to music player
     //public BGM music;
@@ -113,7 +116,7 @@ public class Player : MonoBehaviour
         Vector2 movementNormalized = GetInput();
         Move(movementNormalized * speed);
         CheckForBatmode();
-        CheckIfGameOver();
+        // CheckIfGameOver();
     }
 
     private void CheckForBatmode()
@@ -144,6 +147,17 @@ public class Player : MonoBehaviour
     {
         bloodLevel -= bloodDrain;
         bloodBar.SetBloodLevel(bloodLevel);
+        
+        // TODO
+        // only lose blood when there's still blood (can't go below 0)
+        if (bloodLevel <= 0)
+        {
+            if (!_checkGameOver)
+            {
+                CheckIfGameOver();
+                _checkGameOver = true;
+            }
+        }
     }
     
     private void LoseBloodDrain()
@@ -239,8 +253,14 @@ public class Player : MonoBehaviour
     // CheckIfGameOver checks if the player is out of food points and if so, ends the game.
     private void CheckIfGameOver()
     {
-        if (bloodLevel < 0)
+        // TODO: only check game over once
+        // FIXME: needed the <= instead of <...
+        if (bloodLevel <= 0)
+        {
+            // TODO: need to update the blood level to show on Game Over screen -- just set to 0 since it may go below 
+            GameManager.instance.playerBloodLevel = 0;
             GameManager.instance.GameOver();
+        }
     }
 
     private void Move(Vector2 velocity)

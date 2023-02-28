@@ -31,14 +31,17 @@ public class GameManager : MonoBehaviour
     public BoardManager boardScript;
     private int boardNum = 0;
 
-    public TextMeshProUGUI levelText; 
-    public GameObject levelImage;
+    public static TextMeshProUGUI levelText; 
+    public static GameObject levelImage;
+    public static GameObject gameOverMenu;
     public int level = 0;
     private bool enemiesMoving;
     private bool doingSetup = true;
     
     // instantiate a Canvas from a prefab (because of DontDestroyOnLoad)
     public CanvasManager canvasManager;
+
+    private static bool _initialGame = true;
 
     void Awake()
     {
@@ -75,6 +78,19 @@ public class GameManager : MonoBehaviour
         // Debug.Log("GameManage OnLoadCallback");
         // SceneManager.sceneLoaded -= this.OnLoadCallback;
         // SceneManager.sceneLoaded += this.OnLoadCallback;
+        
+        Debug.Log("initial game " + _initialGame);
+        
+        // SceneManager.sceneLoaded += this.OnLoadCallback;
+
+        // if (!_initialGame)
+        // {
+        //     OnEnable(); 
+        // }
+        // else
+        // {
+        //     _initialGame = false;
+        // }
     }
 
     private void OnEnable()
@@ -149,11 +165,20 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
 
-        levelImage = GameObject.Find("LevelImage").gameObject;
-        levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        // FIXME: can't find the objects below for some reason
+        if (_initialGame)
+        {
+            levelImage = GameObject.Find("LevelImage").gameObject;
+            levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+            gameOverMenu = GameObject.Find(Constants.gameOverMenu).gameObject;
+        }
+        
+        // FIXME: can't find inactive objects...
+        // levelImage = GameObject.Find("LevelImage").gameObject;
+        // levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
 
-        levelText.SetText("Level " + level);
         levelImage.SetActive(true);
+        levelText.SetText("Level " + level);
 
         Invoke("HideLevelImage", levelStartDelay);
         
@@ -185,6 +210,9 @@ public class GameManager : MonoBehaviour
 
         //levelImage = GameObject.Find("LevelImage");
         levelImage.SetActive(true);
+        
+        // make the game over menu active
+        gameOverMenu.SetActive(true);
         
         // destroy the score text
         scoreText.SetText("");
