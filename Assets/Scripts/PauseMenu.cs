@@ -85,6 +85,11 @@ public class PauseMenu : MonoBehaviour
 
         SceneManager.LoadScene(Constants.mainGameScene);
         // Canvas.ForceUpdateCanvases();
+        
+        if (DontDestroyOnLoadManager.canvasObject != null)
+        {
+            DontDestroyOnLoadManager.canvasObject.SetActive(true);
+        }
     }
 
     public void LoadMenu()

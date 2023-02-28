@@ -148,9 +148,12 @@ public class GameManager : MonoBehaviour
     {
         // update the score
         // TODO: need to get the score text object each time
-        scoreText = GameObject.Find("Score Text")
-            .GetComponent<TextMeshProUGUI>();
-        
+        if (_initialGame)
+        {
+            scoreText = GameObject.Find("Score Text")
+                .GetComponent<TextMeshProUGUI>();
+        }
+
         // since _score is kept across levels, just need to update the display with the current score (no additional points added to the score)
         UpdateScore(0);
     }
@@ -179,6 +182,7 @@ public class GameManager : MonoBehaviour
 
         levelImage.SetActive(true);
         levelText.SetText("Level " + level);
+        gameOverMenu.SetActive(false);
 
         Invoke("HideLevelImage", levelStartDelay);
         
@@ -216,7 +220,7 @@ public class GameManager : MonoBehaviour
         
         // destroy the score text
         scoreText.SetText("");
-        Destroy(scoreText);
+        // Destroy(scoreText);
         
         Debug.Log("Game Over -- stopping timer...");
 
@@ -224,7 +228,7 @@ public class GameManager : MonoBehaviour
 
         Timer.timerInstance.StopTime();
         Timer.timerInstance.TimeText.SetText("");
-        Destroy(Timer.timerInstance);
+        // Destroy(Timer.timerInstance);
 
 
         // Enable black background image gameObject.
