@@ -18,7 +18,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    private float enemyCountScaling = 5;
+    private float enemyCountScaling = 3.0f;
 
     public int columns = 8;
     public int rows = 8;
@@ -39,6 +39,7 @@ public class BoardManager : MonoBehaviour
     // need to initialize this to null for initial check
     private Transform boardHolder = null;
     private List<Vector3> gridPositions = new List<Vector3>();
+    private List<Vector3> enemyPositions = new List<Vector3>();
 
     void SetRandomDimensions()
     {
@@ -53,6 +54,7 @@ public class BoardManager : MonoBehaviour
     void InitializeList()
     {
         gridPositions.Clear();
+        enemyPositions.Clear();
         if (Random.value > 0.5f)
         {
             for (int x = 0; x < columns; x++)
@@ -61,6 +63,10 @@ public class BoardManager : MonoBehaviour
                 {
                     gridPositions.Add(new Vector3(x, y, 0f));
                 }
+            }
+            for (int x = 0; x < columns-1; x++)
+            {
+                enemyPositions.Add(new Vector3(x, rows-1, 0f));
             }
         }
         else 
@@ -71,6 +77,10 @@ public class BoardManager : MonoBehaviour
                 {
                     gridPositions.Add(new Vector3(x, y, 0f));
                 }
+            }
+            for (int y = 0; y < rows - 1; y++)
+            {
+                enemyPositions.Add(new Vector3(columns-1, y, 0f));
             }
         }
 
@@ -110,26 +120,11 @@ public class BoardManager : MonoBehaviour
         return randomPosition;
     }
 
-    Vector3 RandomPositionNearExit()
+    Vector3 RandomEnemyPosition()
     {
-        bool valid = false;
-        int randomIndex = -1;
-        Vector3 randomPosition = Vector3.zero;
-        while (!valid) 
-        {
-            randomIndex = Random.Range(0, gridPositions.Count);
-            randomPosition = gridPositions[randomIndex];
-            if (randomPosition.x > rows / 2 && randomPosition.y > columns / 2)
-            {
-                valid = true;
-            }
-            else
-            {
-                Debug.Log("Stuck in RandomPositionNearExit");
-            }
-        }
-
-        gridPositions.RemoveAt(randomIndex);
+        int randomIndex = Random.Range(0, enemyPositions.Count);
+        Vector3 randomPosition = enemyPositions[randomIndex];
+        enemyPositions.RemoveAt(randomIndex);
         return randomPosition;
     }
 
@@ -148,10 +143,12 @@ public class BoardManager : MonoBehaviour
     void LayoutEnemies(GameObject[] tileArray, int level)
     {
         int enemyCount = ChooseEnemyCount(level);
+        Debug.Log("Spawning in " + enemyCount + " enemies");
 
         for(int i = 0; i < enemyCount; i++) 
         {
-            Vector3 randomPosition = RandomPositionNearExit();
+            Vector3 randomPosition = RandomEnemyPosition();
+            Debug.Log("Spawning enemy at " + randomPosition.x + ", " + randomPosition.y);
             GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
             Instantiate(tileChoice, randomPosition, Quaternion.identity);
         }
