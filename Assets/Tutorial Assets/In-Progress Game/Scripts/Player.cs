@@ -145,29 +145,15 @@ public class Player : MonoBehaviour
 
     void LoseBlood(int amount)
     {
-        bloodLevel -= bloodDrain;
+        bloodLevel -= amount;
         bloodBar.SetBloodLevel(bloodLevel);
         
-        // TODO
-        // only lose blood when there's still blood (can't go below 0)
-        if (bloodLevel <= 0)
-        {
-            if (!_checkGameOver)
-            {
-                CheckIfGameOver();
-                _checkGameOver = true;
-            }
-        }
+        CheckIfGameOver();
     }
     
     private void LoseBloodDrain()
     {
         LoseBlood(bloodDrain);
-    }
-
-    public void LoseBloodHorde()
-    {
-        LoseBlood(_hordBloodDrain);
     }
 
     void GainBlood(int amount)
@@ -219,17 +205,12 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Enemy")
-        {
-            // TODO: deplete blood level instead of instant Game Over
-            // Call the GameOver function of GameManager.
-            // GameManager.instance.GameOver("The horde got you...\n");
-            
+        {         
             // TODO: no longer destroys the player either
             // make sure to destroy player
             // Destroy(gameObject);
             
             // deplete blood level
-            Debug.Log("Collided with horde");
             LoseBlood(_hordBloodDrain);
 
             // TODO: need to re-enable to keep the collision check active (BEFORE - just check once and collision is disabled afterwards) 
@@ -253,10 +234,10 @@ public class Player : MonoBehaviour
     // CheckIfGameOver checks if the player is out of food points and if so, ends the game.
     private void CheckIfGameOver()
     {
-        // TODO: only check game over once
-        // FIXME: needed the <= instead of <...
+
         if (bloodLevel <= 0)
         {
+            Debug.Log("PLAYER SAYS GAME OVER");
             // TODO: need to update the blood level to show on Game Over screen -- just set to 0 since it may go below 
             GameManager.instance.playerBloodLevel = 0;
             GameManager.instance.GameOver();

@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
     public BoardManager boardScript;
     private int boardNum = 0;
 
-    public static TextMeshProUGUI levelText; 
-    public static GameObject levelImage;
-    public static GameObject gameOverMenu;
+    public TextMeshProUGUI levelText; 
+    public GameObject levelImage;
+    public GameObject gameOverMenu;
     public int level = 0;
     private bool enemiesMoving;
     private bool doingSetup = true;
@@ -206,17 +206,18 @@ public class GameManager : MonoBehaviour
     // GameOver is called when the player reaches 0 food points
     public void GameOver()
     {
+        GameObject.Find("Canvas").GetComponent<GameOverMenu>().DisplayGameOver(level, _score);;
         Debug.Log("Got to game over");
         // update the game over screen with some stats
-        levelText.text = "Your cravings were not satisfied...\n" + 
-                         "Level: " + level + "\n" + 
-                         "Score: " + _score;
-
+        //levelText.text = "Your cravings were not satisfied...\n" + 
+        //                 "Level: " + level + "\n" + 
+        //                 "Score: " + _score;
+        //
         //levelImage = GameObject.Find("LevelImage");
-        levelImage.SetActive(true);
+        //levelImage.SetActive(true);
         
         // make the game over menu active
-        gameOverMenu.SetActive(true);
+        //gameOverMenu.SetActive(true);
         
         // destroy the score text
         scoreText.SetText("");
