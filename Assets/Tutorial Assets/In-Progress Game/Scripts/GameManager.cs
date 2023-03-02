@@ -206,7 +206,8 @@ public class GameManager : MonoBehaviour
     // GameOver is called when the player reaches 0 food points
     public void GameOver()
     {
-        GameObject.Find("Canvas").GetComponent<GameOverMenu>().DisplayGameOver(level, _score);;
+        GameObject.Find("Canvas").GetComponent<GameOverMenu>()
+            .DisplayGameOver(level, _score);
         Debug.Log("Got to game over");
         // update the game over screen with some stats
         //levelText.text = "Your cravings were not satisfied...\n" + 

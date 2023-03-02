@@ -14,6 +14,8 @@ public class PlayerAwarenessController : MonoBehaviour
 
     private Transform _player;
 
+    public PolygonCollider2D polygonCollider2D;
+
     // TODO: might not work with procedural gen
     private void Awake()
     {
@@ -27,5 +29,8 @@ public class PlayerAwarenessController : MonoBehaviour
         DirectionToPlayer = enemyToPlayerVector.normalized;
 
         Aware = (enemyToPlayerVector.magnitude <= _playerAwarenessDistance);
+        
+        // update polygon collider
+        polygonCollider2D.TryUpdateShapeToAttachedSprite();
     }
 }
