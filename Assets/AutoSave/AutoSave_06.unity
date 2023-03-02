@@ -1305,6 +1305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAwarenessDistance: 1e+10
+  polygonCollider2D: {fileID: 1049811865}
 --- !u!50 &1049811864
 Rigidbody2D:
   serializedVersion: 4
@@ -2946,8 +2947,24 @@ PrefabInstance:
     - target: {fileID: 4136237575194408889, guid: 6325bb2d4a52d80429ea7abf8ac9ca9b,
         type: 3}
       propertyPath: m_text
-      value: a
+      value: Hi Stakes
       objectReference: {fileID: 0}
+    - target: {fileID: 4136237575194408889, guid: 6325bb2d4a52d80429ea7abf8ac9ca9b,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7dfb65c7a03a6b443ba655d01f455e9a,
+        type: 2}
+    - target: {fileID: 4136237575194408889, guid: 6325bb2d4a52d80429ea7abf8ac9ca9b,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136237575194408889, guid: 6325bb2d4a52d80429ea7abf8ac9ca9b,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 185ddf1a006c59c4ca22880a002ff3d7, type: 2}
     - target: {fileID: 4136237575194408889, guid: 6325bb2d4a52d80429ea7abf8ac9ca9b,
         type: 3}
       propertyPath: m_VerticalAlignment
@@ -3265,6 +3282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAwarenessDistance: 1e+10
+  polygonCollider2D: {fileID: 0}
 --- !u!1001 &5791594666068611372
 PrefabInstance:
   m_ObjectHideFlags: 0
